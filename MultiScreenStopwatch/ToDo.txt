@@ -1,0 +1,9 @@
+Configuration File
+	1) Defaults (wxFileConfig?)
+	2) Switch to plist?
+
+Configuration Dialog
+	Move everything that is not commonly adjusted to a separate dialog. This should only leave "Timer Minutes" and "Time left before warning" on the main screen.
+
+Internationalization
+Find a method to do internationalization i18n, wxWidgets: http://docs.wxwidgets.org/trunk/overview_i18n.html

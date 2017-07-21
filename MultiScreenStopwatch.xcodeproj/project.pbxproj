@@ -1,0 +1,349 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AF77B1291F227CC20007A7FF /* TextControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1201F227CC20007A7FF /* TextControl.cpp */; };
+		AF77B12A1F227CC20007A7FF /* SettingsFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */; };
+		AF77B12B1F227CC20007A7FF /* SecondTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1241F227CC20007A7FF /* SecondTimer.cpp */; };
+		AF77B12C1F227CC20007A7FF /* TimerFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1261F227CC20007A7FF /* TimerFrame.cpp */; };
+		AF77B12D1F227CC20007A7FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1281F227CC20007A7FF /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AF7887BB1EE9DEBF000E12A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AF77B11F1F227CC20007A7FF /* ToDo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ToDo.txt; path = MultiScreenStopwatch/ToDo.txt; sourceTree = SOURCE_ROOT; };
+		AF77B1201F227CC20007A7FF /* TextControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextControl.cpp; path = MultiScreenStopwatch/TextControl.cpp; sourceTree = SOURCE_ROOT; };
+		AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SettingsFrame.cpp; path = MultiScreenStopwatch/SettingsFrame.cpp; sourceTree = SOURCE_ROOT; };
+		AF77B1221F227CC20007A7FF /* TextControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextControl.hpp; path = MultiScreenStopwatch/TextControl.hpp; sourceTree = SOURCE_ROOT; };
+		AF77B1231F227CC20007A7FF /* SettingsFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SettingsFrame.hpp; path = MultiScreenStopwatch/SettingsFrame.hpp; sourceTree = SOURCE_ROOT; };
+		AF77B1241F227CC20007A7FF /* SecondTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecondTimer.cpp; path = MultiScreenStopwatch/SecondTimer.cpp; sourceTree = SOURCE_ROOT; };
+		AF77B1251F227CC20007A7FF /* SecondTimer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SecondTimer.hpp; path = MultiScreenStopwatch/SecondTimer.hpp; sourceTree = SOURCE_ROOT; };
+		AF77B1261F227CC20007A7FF /* TimerFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerFrame.cpp; path = MultiScreenStopwatch/TimerFrame.cpp; sourceTree = SOURCE_ROOT; };
+		AF77B1271F227CC20007A7FF /* TimerFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TimerFrame.hpp; path = MultiScreenStopwatch/TimerFrame.hpp; sourceTree = SOURCE_ROOT; };
+		AF77B1281F227CC20007A7FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = MultiScreenStopwatch/main.cpp; sourceTree = SOURCE_ROOT; };
+		AF7887BD1EE9DEBF000E12A2 /* MultiScreenStopwatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MultiScreenStopwatch; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF7887BA1EE9DEBF000E12A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AF7887B41EE9DEBF000E12A2 = {
+			isa = PBXGroup;
+			children = (
+				AF7887BF1EE9DEBF000E12A2 /* MultiScreenStopwatch */,
+				AF7887BE1EE9DEBF000E12A2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF7887BE1EE9DEBF000E12A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF7887BD1EE9DEBF000E12A2 /* MultiScreenStopwatch */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF7887BF1EE9DEBF000E12A2 /* MultiScreenStopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				AF77B11F1F227CC20007A7FF /* ToDo.txt */,
+				AF77B1201F227CC20007A7FF /* TextControl.cpp */,
+				AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */,
+				AF77B1221F227CC20007A7FF /* TextControl.hpp */,
+				AF77B1231F227CC20007A7FF /* SettingsFrame.hpp */,
+				AF77B1241F227CC20007A7FF /* SecondTimer.cpp */,
+				AF77B1251F227CC20007A7FF /* SecondTimer.hpp */,
+				AF77B1261F227CC20007A7FF /* TimerFrame.cpp */,
+				AF77B1271F227CC20007A7FF /* TimerFrame.hpp */,
+				AF77B1281F227CC20007A7FF /* main.cpp */,
+			);
+			name = MultiScreenStopwatch;
+			path = TestWxWidgets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AF7887BC1EE9DEBF000E12A2 /* MultiScreenStopwatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF7887C41EE9DEBF000E12A2 /* Build configuration list for PBXNativeTarget "MultiScreenStopwatch" */;
+			buildPhases = (
+				AF7887B91EE9DEBF000E12A2 /* Sources */,
+				AF7887BA1EE9DEBF000E12A2 /* Frameworks */,
+				AF7887BB1EE9DEBF000E12A2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultiScreenStopwatch;
+			productName = TestWxWidgets;
+			productReference = AF7887BD1EE9DEBF000E12A2 /* MultiScreenStopwatch */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF7887B51EE9DEBF000E12A2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = JMJAtlanta;
+				TargetAttributes = {
+					AF7887BC1EE9DEBF000E12A2 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = AF7887B81EE9DEBF000E12A2 /* Build configuration list for PBXProject "MultiScreenStopwatch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AF7887B41EE9DEBF000E12A2;
+			productRefGroup = AF7887BE1EE9DEBF000E12A2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF7887BC1EE9DEBF000E12A2 /* MultiScreenStopwatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF7887B91EE9DEBF000E12A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF77B12A1F227CC20007A7FF /* SettingsFrame.cpp in Sources */,
+				AF77B12C1F227CC20007A7FF /* TimerFrame.cpp in Sources */,
+				AF77B12B1F227CC20007A7FF /* SecondTimer.cpp in Sources */,
+				AF77B1291F227CC20007A7FF /* TextControl.cpp in Sources */,
+				AF77B12D1F227CC20007A7FF /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AF7887C21EE9DEBF000E12A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AF7887C31EE9DEBF000E12A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AF7887C51EE9DEBF000E12A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = (
+					"-I/usr/local/lib/wx/include/osx_cocoa-unicode-3.0",
+					"-I/usr/local/include/wx-3.0",
+					"-D_FILE_OFFSET_BITS=64",
+					"-DWXUSINGDLL",
+					"-D__WXMAC__",
+					"-D__WXOSX__",
+					"-D__WXOSX_COCOA__",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-L/usr/local/lib",
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					System,
+					"-framework",
+					OpenGL,
+					"-lwx_osx_cocoau_xrc-3.0",
+					"-lwx_osx_cocoau_webview-3.0",
+					"-lwx_osx_cocoau_html-3.0",
+					"-lwx_osx_cocoau_qa-3.0",
+					"-lwx_osx_cocoau_adv-3.0",
+					"-lwx_osx_cocoau_core-3.0",
+					"-lwx_baseu_xml-3.0",
+					"-lwx_baseu_net-3.0",
+					"-lwx_baseu-3.0",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AF7887C61EE9DEBF000E12A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CPLUSPLUSFLAGS = (
+					"-I/usr/local/lib/wx/include/osx_cocoa-unicode-3.0",
+					"-I/usr/local/include/wx-3.0",
+					"-D_FILE_OFFSET_BITS=64",
+					"-DWXUSINGDLL",
+					"-D__WXMAC__",
+					"-D__WXOSX__",
+					"-D__WXOSX_COCOA__",
+				);
+				OTHER_LDFLAGS = (
+					"-L/usr/local/lib",
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					System,
+					"-framework",
+					OpenGL,
+					"-lwx_osx_cocoau_xrc-3.0",
+					"-lwx_osx_cocoau_webview-3.0",
+					"-lwx_osx_cocoau_html-3.0",
+					"-lwx_osx_cocoau_qa-3.0",
+					"-lwx_osx_cocoau_adv-3.0",
+					"-lwx_osx_cocoau_core-3.0",
+					"-lwx_baseu_xml-3.0",
+					"-lwx_baseu_net-3.0",
+					"-lwx_baseu-3.0",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF7887B81EE9DEBF000E12A2 /* Build configuration list for PBXProject "MultiScreenStopwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF7887C21EE9DEBF000E12A2 /* Debug */,
+				AF7887C31EE9DEBF000E12A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF7887C41EE9DEBF000E12A2 /* Build configuration list for PBXNativeTarget "MultiScreenStopwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF7887C51EE9DEBF000E12A2 /* Debug */,
+				AF7887C61EE9DEBF000E12A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF7887B51EE9DEBF000E12A2 /* Project object */;
+}
