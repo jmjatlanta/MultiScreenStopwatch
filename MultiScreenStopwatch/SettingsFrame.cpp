@@ -26,7 +26,7 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	// create a panel that has a BoxSizer that has a FlexGridSizer
 	panel = new wxPanel(this, -1);
 	horizontal_box = new wxBoxSizer(wxHORIZONTAL);
-	flex_grid_sizer = new wxFlexGridSizer(9,2,25,25);
+	flex_grid_sizer = new wxFlexGridSizer(10,2,25,25);
 	
 	// labels
 	textScreenNumber = new wxStaticText(panel, -1, wxT("Screen Number"));
@@ -55,6 +55,7 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	// buttons
 	buttonStart = new wxButton(panel, BUTTON_Start, _T("Start"));
 	buttonStop  = new wxButton(panel, BUTTON_Stop,  _T("Stop"));
+	buttonHide  = new wxButton(panel, BUTTON_Hide, _T("Hide"));
 	
 	// put everything into the wxFlexGridSizer
 	flex_grid_sizer->Add(textScreenNumber);
@@ -73,10 +74,13 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	flex_grid_sizer->Add(inputForegroundColorError, 1, wxEXPAND);
 	flex_grid_sizer->Add(buttonStart);
 	flex_grid_sizer->Add(buttonStop, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonHide);
+	flex_grid_sizer->AddStretchSpacer();
 	flex_grid_sizer->Add(textTimerDisplaying);
+	flex_grid_sizer->AddStretchSpacer();
 	
 	// If we're going to grow vertically, grow the review text area
-	flex_grid_sizer->AddGrowableRow(8, 1); // row 3, proportion 1
+	flex_grid_sizer->AddGrowableRow(9, 1); // row 3, proportion 1
 	// if we're going to grow horizontally, grow the data input column
 	flex_grid_sizer->AddGrowableCol(1, 1); // column 1, proportion 1
 	
@@ -117,6 +121,7 @@ SettingsFrame::~SettingsFrame()
 BEGIN_EVENT_TABLE(SettingsFrame, wxFrame)
 EVT_BUTTON (BUTTON_Start, SettingsFrame::OnButtonStart)
 EVT_BUTTON (BUTTON_Stop, SettingsFrame::OnButtonStop)
+EVT_BUTTON (BUTTON_Hide, SettingsFrame::OnButtonHide)
 END_EVENT_TABLE()
 
 void SettingsFrame::OnButtonStart(wxCommandEvent &event)
@@ -173,6 +178,15 @@ void SettingsFrame::OnButtonStop(wxCommandEvent &event)
 	secondTimer->StopTimer();
 }
 
+void SettingsFrame::OnButtonHide(wxCommandEvent &event)
+{
+	secondTimer->StopTimer();
+	currentTimerFrame->Hide();
+	delete currentTimerFrame;
+	currentTimerFrame = nullptr;
+	inputScreenNumber->SetEditable(true);
+}
+
 TimerFrame* SettingsFrame::createTimerOnDisplay(int displayNumber)
 {
 	wxDisplay *chosenDisplay = new wxDisplay((int)displayNumber);
@@ -191,15 +205,17 @@ TimerFrame* SettingsFrame::createTimerOnDisplay(int displayNumber)
 
 void SettingsFrame::OnTimer(wxTimerEvent &Event)
 {
-	// see if we need to change the color
-	std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-	wxColour *currentColor = normalColor;
-	if (now >= warningTime) {
-		if (now >= errorTime)
-			currentColor = errorColor;
-		else
-			currentColor = warningColor;
-		currentTimerFrame->SetForegroundColour(*currentColor);
+	if (currentTimerFrame != nullptr) {
+		// see if we need to change the color
+		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+		wxColour *currentColor = normalColor;
+		if (now >= warningTime) {
+			if (now >= errorTime)
+				currentColor = errorColor;
+			else
+				currentColor = warningColor;
+			currentTimerFrame->SetForegroundColour(*currentColor);
+		}
 	}
 	textTimerDisplaying->SetLabel(SecondTimer::ToString(secondTimer->SecondsSinceStart()));
 	Event.Skip();

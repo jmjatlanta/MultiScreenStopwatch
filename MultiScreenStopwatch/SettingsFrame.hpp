@@ -21,6 +21,7 @@ public:
 	~SettingsFrame();
 	void OnButtonStart(wxCommandEvent& event);
 	void OnButtonStop(wxCommandEvent& event);
+	void OnButtonHide(wxCommandEvent& event);
 	DECLARE_EVENT_TABLE()
 private:
 	/////////////
@@ -73,12 +74,14 @@ private:
 	TextControl *inputForegroundColorError;
 	wxButton *buttonStart;
 	wxButton *buttonStop;
+	wxButton *buttonHide;
 };
 
 enum
 {
 	BUTTON_Start = wxID_HIGHEST + 1,
-	BUTTON_Stop = BUTTON_Start + 1
+	BUTTON_Stop = BUTTON_Start + 1,
+	BUTTON_Hide = BUTTON_Stop + 1
 };
 
 
