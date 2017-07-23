@@ -12,6 +12,7 @@
 #include <wx/display.h>
 #include <wx/fontdlg.h>
 #include <wx/generic/fontdlgg.h>
+#include <wx/colordlg.h>
 
 SettingsFrame::SettingsFrame(const wxString& window_title)
 	: wxFrame(NULL, -1, window_title, wxPoint(-1, -1), wxSize(540, 540))
@@ -26,7 +27,7 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	// create a panel that has a BoxSizer that has a FlexGridSizer
 	panel = new wxPanel(this, -1);
 	horizontal_box = new wxBoxSizer(wxHORIZONTAL);
-	flex_grid_sizer = new wxFlexGridSizer(10,2,25,25);
+	flex_grid_sizer = new wxFlexGridSizer(10,3,25,25);
 	
 	// labels
 	textScreenNumber = new wxStaticText(panel, -1, wxT("Screen Number"));
@@ -42,42 +43,67 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	inputScreenNumber->SetValue(_T("2"));
 	inputTimerMinutes = new wxTextCtrl(panel, -1);
 	inputTimerMinutes->SetValue(_T("1"));
-	inputBackgroundColor = new TextControl(panel);
+	inputBackgroundColor = new wxTextCtrl(panel, -1);
 	inputBackgroundColor->SetValue("rgb(127, 127, 127)");
-	inputForegroundColorNormal = new TextControl(panel);
+	inputForegroundColorNormal = new wxTextCtrl(panel, -1);
 	inputForegroundColorNormal->SetValue("black");
-	inputForegroundColorWarning = new TextControl(panel);
+	inputForegroundColorWarning = new wxTextCtrl(panel, -1);
 	inputForegroundColorWarning->SetValue("rgb(204,208,15)");
 	inputWarningTime = new wxTextCtrl(panel, -1);
 	inputWarningTime->SetValue("0:30");
-	inputForegroundColorError = new TextControl(panel);
+	inputForegroundColorError = new wxTextCtrl(panel, -1);
 	inputForegroundColorError->SetValue("rgb(175,0,20)");
 	// buttons
 	buttonStart = new wxButton(panel, BUTTON_Start, _T("Start"));
 	buttonStop  = new wxButton(panel, BUTTON_Stop,  _T("Stop"));
 	buttonHide  = new wxButton(panel, BUTTON_Hide, _T("Hide"));
+	buttonBackgroundColor = new wxButton(panel, BUTTON_BackgroundColor, _T("C"));
+	buttonForegroundColorNormal = new wxButton(panel, BUTTON_ForegroundColorNormal, _T("C"));
+	buttonForegroundColorWarning = new wxButton(panel, BUTTON_ForegroundColorWarning, _T("C"));
+	buttonForegroundColorError = new wxButton(panel, BUTTON_ForegroundColorError, _T("C"));
 	
 	// put everything into the wxFlexGridSizer
+	// row 0
 	flex_grid_sizer->Add(textScreenNumber);
 	flex_grid_sizer->Add(inputScreenNumber, 1, wxEXPAND);
+	flex_grid_sizer->AddSpacer(0);
+	// row 1
 	flex_grid_sizer->Add(textTimerMinutes);
 	flex_grid_sizer->Add(inputTimerMinutes, 1, wxEXPAND);
+	flex_grid_sizer->AddSpacer(0);
+	// row 2
 	flex_grid_sizer->Add(textBackgroundColor);
 	flex_grid_sizer->Add(inputBackgroundColor, 1, wxEXPAND);
+	//TODO: Add button
+	flex_grid_sizer->Add(buttonBackgroundColor);
+	// row 3
 	flex_grid_sizer->Add(textForegroundColorNormal);
 	flex_grid_sizer->Add(inputForegroundColorNormal, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonForegroundColorNormal);
+	// row 4
 	flex_grid_sizer->Add(textForegroundColorWarning);
 	flex_grid_sizer->Add(inputForegroundColorWarning, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonForegroundColorWarning);
+	// row 5
 	flex_grid_sizer->Add(textWarningTime);
 	flex_grid_sizer->Add(inputWarningTime, 1, wxEXPAND);
+	flex_grid_sizer->AddSpacer(0);
+	// row 6
 	flex_grid_sizer->Add(textForegroundColorError);
 	flex_grid_sizer->Add(inputForegroundColorError, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonForegroundColorError);
+	// row 7
 	flex_grid_sizer->Add(buttonStart);
 	flex_grid_sizer->Add(buttonStop, 1, wxEXPAND);
+	flex_grid_sizer->AddSpacer(0);
+	// row 8
 	flex_grid_sizer->Add(buttonHide);
 	flex_grid_sizer->AddStretchSpacer();
+	flex_grid_sizer->AddSpacer(0);
+	// row 9
 	flex_grid_sizer->Add(textTimerDisplaying);
 	flex_grid_sizer->AddStretchSpacer();
+	flex_grid_sizer->AddSpacer(0);
 	
 	// If we're going to grow vertically, grow the review text area
 	flex_grid_sizer->AddGrowableRow(9, 1); // row 3, proportion 1
@@ -111,6 +137,10 @@ SettingsFrame::~SettingsFrame()
 	// buttons
 	buttonStart->Destroy();
 	buttonStop->Destroy();
+	buttonBackgroundColor->Destroy();
+	buttonForegroundColorNormal->Destroy();
+	buttonForegroundColorWarning->Destroy();
+	buttonForegroundColorError->Destroy();
 	//delete flex_grid_sizer;
 	//delete horizontal_box;
 	panel->Destroy();
@@ -122,6 +152,10 @@ BEGIN_EVENT_TABLE(SettingsFrame, wxFrame)
 EVT_BUTTON (BUTTON_Start, SettingsFrame::OnButtonStart)
 EVT_BUTTON (BUTTON_Stop, SettingsFrame::OnButtonStop)
 EVT_BUTTON (BUTTON_Hide, SettingsFrame::OnButtonHide)
+EVT_BUTTON (BUTTON_BackgroundColor, SettingsFrame::OnButtonBackgroundColor)
+EVT_BUTTON (BUTTON_ForegroundColorNormal, SettingsFrame::OnButtonForegroundColorNormal)
+EVT_BUTTON (BUTTON_ForegroundColorWarning, SettingsFrame::OnButtonForegroundColorWarning)
+EVT_BUTTON (BUTTON_ForegroundColorError, SettingsFrame::OnButtonForegroundColorError)
 END_EVENT_TABLE()
 
 void SettingsFrame::OnButtonStart(wxCommandEvent &event)
@@ -185,6 +219,32 @@ void SettingsFrame::OnButtonHide(wxCommandEvent &event)
 	delete currentTimerFrame;
 	currentTimerFrame = nullptr;
 	inputScreenNumber->SetEditable(true);
+}
+
+void SettingsFrame::OnButtonBackgroundColor(wxCommandEvent &event) {
+	OnColorButton(inputBackgroundColor);
+}
+void SettingsFrame::OnButtonForegroundColorNormal(wxCommandEvent &event) {
+	OnColorButton(inputForegroundColorNormal);
+}
+void SettingsFrame::OnButtonForegroundColorWarning(wxCommandEvent &event) {
+	OnColorButton(inputForegroundColorWarning);
+}
+void SettingsFrame::OnButtonForegroundColorError(wxCommandEvent &event) {
+	OnColorButton(inputForegroundColorError);
+}
+
+void SettingsFrame::OnColorButton(wxTextCtrl* textControl) {
+	wxString currentSetting = textControl->GetValue();
+	wxColour currentColor(currentSetting);
+	wxColourData colorData;
+	colorData.SetColour(currentColor);
+	wxColourDialog dlg(this, &colorData);
+	if (dlg.ShowModal() == wxID_OK) {
+		wxColourData data = dlg.GetColourData();
+		wxColour color = data.GetColour();
+		textControl->SetValue(color.GetAsString());
+	}
 }
 
 TimerFrame* SettingsFrame::createTimerOnDisplay(int displayNumber)

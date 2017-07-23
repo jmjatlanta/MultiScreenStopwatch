@@ -4,6 +4,8 @@ Configuration File
 
 Configuration Dialog
 	Move everything that is not commonly adjusted to a separate dialog. This should only leave "Timer Minutes" and "Time left before warning" on the main screen.
+	Fix the color chooser. Require a click to display. When chosen, display color in text box instead
+		of the rgb values.
 
 Internationalization
 Find a method to do internationalization i18n, wxWidgets: http://docs.wxwidgets.org/trunk/overview_i18n.html

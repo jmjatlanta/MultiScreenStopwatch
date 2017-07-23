@@ -1,11 +1,8 @@
-//
-//  TextControl.hpp
-//  TestWxWidgets
-//
-//  Created by John Jones on 6/18/17.
-//  Copyright © 2017 JMJAtlanta. All rights reserved.
-//
-
+/**
+ * This is an experimental class to pop up a dialog when this control
+ * gets focus. It does not work too well, as it pops up when it 
+ * shouldn't. More refining is required. Not using for now...
+ */
 #ifndef TextControl_hpp
 #define TextControl_hpp
 
