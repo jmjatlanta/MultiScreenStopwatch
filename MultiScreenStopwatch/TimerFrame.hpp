@@ -21,7 +21,7 @@ public:
 	TimerFrame(wxWindow *parent, SecondTimer* secondTimer);
 	~TimerFrame();
 public:
-	void SetTimer(int minutes);
+	void SetTimer(std::chrono::seconds seconds);
 	void OnTimer(wxTimerEvent& event);
 	bool SetForegroundColour(const wxColour &colour);
 

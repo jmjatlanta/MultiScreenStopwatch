@@ -49,9 +49,9 @@ TimerFrame::~TimerFrame()
 	delete alarmClockFont;
 }
 
-void TimerFrame::SetTimer(int minutes)
+void TimerFrame::SetTimer(std::chrono::seconds seconds)
 {
-	textTimer->SetLabel(SecondTimer::ToString(minutes));
+	textTimer->SetLabel(SecondTimer::ToString(seconds));
 }
 
 void TimerFrame::OnTimer(wxTimerEvent& event)

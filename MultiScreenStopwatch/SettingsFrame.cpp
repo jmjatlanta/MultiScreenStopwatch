@@ -31,7 +31,7 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	
 	// labels
 	textScreenNumber = new wxStaticText(panel, -1, wxT("Screen Number"));
-	textTimerMinutes = new wxStaticText(panel, -1, wxT("Timer Minutes"));
+	textTimerMinutes = new wxStaticText(panel, -1, wxT("Timer MM:SS"));
 	textBackgroundColor = new wxStaticText(panel, -1, wxT("Background Color"));
 	textForegroundColorNormal = new wxStaticText(panel, -1, wxT("Foreground Color Normal"));
 	textForegroundColorWarning = new wxStaticText(panel, -1, wxT("Foreground Color Warning"));
@@ -42,17 +42,21 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	inputScreenNumber = new wxTextCtrl(panel, -1);
 	inputScreenNumber->SetValue(_T("2"));
 	inputTimerMinutes = new wxTextCtrl(panel, -1);
-	inputTimerMinutes->SetValue(_T("1"));
-	inputBackgroundColor = new wxTextCtrl(panel, -1);
-	inputBackgroundColor->SetValue("rgb(127, 127, 127)");
-	inputForegroundColorNormal = new wxTextCtrl(panel, -1);
-	inputForegroundColorNormal->SetValue("black");
-	inputForegroundColorWarning = new wxTextCtrl(panel, -1);
-	inputForegroundColorWarning->SetValue("rgb(204,208,15)");
+	inputTimerMinutes->SetValue(_T("1:00"));
 	inputWarningTime = new wxTextCtrl(panel, -1);
 	inputWarningTime->SetValue("0:30");
+	inputBackgroundColor = new wxTextCtrl(panel, -1);
+	inputBackgroundColor->SetValue("black");
+	SetControlColors(inputBackgroundColor);
+	inputForegroundColorNormal = new wxTextCtrl(panel, -1);
+	inputForegroundColorNormal->SetValue("rgb(156, 156, 156)");
+	SetControlColors(inputForegroundColorNormal);
+	inputForegroundColorWarning = new wxTextCtrl(panel, -1);
+	inputForegroundColorWarning->SetValue("rgb(204, 208, 15)");
+	SetControlColors(inputForegroundColorWarning);
 	inputForegroundColorError = new wxTextCtrl(panel, -1);
-	inputForegroundColorError->SetValue("rgb(175,0,20)");
+	inputForegroundColorError->SetValue("rgb(175, 0, 20)");
+	SetControlColors(inputForegroundColorError);
 	// buttons
 	buttonStart = new wxButton(panel, BUTTON_Start, _T("Start"));
 	buttonStop  = new wxButton(panel, BUTTON_Stop,  _T("Stop"));
@@ -72,22 +76,21 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	flex_grid_sizer->Add(inputTimerMinutes, 1, wxEXPAND);
 	flex_grid_sizer->AddSpacer(0);
 	// row 2
-	flex_grid_sizer->Add(textBackgroundColor);
-	flex_grid_sizer->Add(inputBackgroundColor, 1, wxEXPAND);
-	//TODO: Add button
-	flex_grid_sizer->Add(buttonBackgroundColor);
-	// row 3
-	flex_grid_sizer->Add(textForegroundColorNormal);
-	flex_grid_sizer->Add(inputForegroundColorNormal, 1, wxEXPAND);
-	flex_grid_sizer->Add(buttonForegroundColorNormal);
-	// row 4
-	flex_grid_sizer->Add(textForegroundColorWarning);
-	flex_grid_sizer->Add(inputForegroundColorWarning, 1, wxEXPAND);
-	flex_grid_sizer->Add(buttonForegroundColorWarning);
-	// row 5
 	flex_grid_sizer->Add(textWarningTime);
 	flex_grid_sizer->Add(inputWarningTime, 1, wxEXPAND);
 	flex_grid_sizer->AddSpacer(0);
+	// row 3
+	flex_grid_sizer->Add(textBackgroundColor);
+	flex_grid_sizer->Add(inputBackgroundColor, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonBackgroundColor);
+	// row 4
+	flex_grid_sizer->Add(textForegroundColorNormal);
+	flex_grid_sizer->Add(inputForegroundColorNormal, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonForegroundColorNormal);
+	// row 5
+	flex_grid_sizer->Add(textForegroundColorWarning);
+	flex_grid_sizer->Add(inputForegroundColorWarning, 1, wxEXPAND);
+	flex_grid_sizer->Add(buttonForegroundColorWarning);
 	// row 6
 	flex_grid_sizer->Add(textForegroundColorError);
 	flex_grid_sizer->Add(inputForegroundColorError, 1, wxEXPAND);
@@ -171,10 +174,16 @@ void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 		return;
 	
 	strValue = inputTimerMinutes->GetValue();
-	long timerMinutes;
-	if (!strValue.ToLong(&timerMinutes))
-		return;
-	
+	std::chrono::seconds timerSeconds(0);
+	if (strValue.Contains(":")) {
+		std::string s = std::string(strValue.mb_str());
+		std::string mins = s.substr(0, s.find(':'));
+		std::string secs = s.substr(s.find(':') + 1);
+		timerSeconds += std::chrono::minutes(std::stoi(mins));
+		timerSeconds += std::chrono::seconds(std::stoi(secs));
+	} else {
+		timerSeconds += std::chrono::minutes(std::stoi(std::string(strValue.mb_str())));
+	}
 	
 	// we can no longer set the display number
 	inputScreenNumber->SetEditable(false);
@@ -187,7 +196,7 @@ void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 	this->SetFocus();
 	
 	// now set time
-	currentTimerFrame->SetTimer((int)timerMinutes);
+	currentTimerFrame->SetTimer(timerSeconds);
 	// set background color
 	strValue = inputBackgroundColor->GetValue();
 	currentTimerFrame->SetBackgroundColour(wxColour(strValue));
@@ -202,7 +211,7 @@ void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 	secondTimer->StartTimer();
 	// do the calculations
 	this->startTime = secondTimer->GetStartTime();
-	this->errorTime = startTime + std::chrono::minutes(timerMinutes);
+	this->errorTime = startTime + timerSeconds;
 	strValue = inputWarningTime->GetValue();
 	this->warningTime = this->errorTime - getDuration(strValue.ToStdString());
 }
@@ -222,7 +231,12 @@ void SettingsFrame::OnButtonHide(wxCommandEvent &event)
 }
 
 void SettingsFrame::OnButtonBackgroundColor(wxCommandEvent &event) {
-	OnColorButton(inputBackgroundColor);
+	wxColour result;
+	OnColorButton(inputBackgroundColor, &result);
+	// now set background of controls
+	inputForegroundColorNormal->SetBackgroundColour(result);
+	inputForegroundColorWarning->SetBackgroundColour(result);
+	inputForegroundColorError->SetBackgroundColour(result);
 }
 void SettingsFrame::OnButtonForegroundColorNormal(wxCommandEvent &event) {
 	OnColorButton(inputForegroundColorNormal);
@@ -234,7 +248,32 @@ void SettingsFrame::OnButtonForegroundColorError(wxCommandEvent &event) {
 	OnColorButton(inputForegroundColorError);
 }
 
-void SettingsFrame::OnColorButton(wxTextCtrl* textControl) {
+void SettingsFrame::SetControlColors(wxTextCtrl *control)
+{
+	// convert text to wxColor
+	wxString str = control->GetValue();
+	wxColour color(str);
+	
+	if (control == inputBackgroundColor) {
+		control->SetBackgroundColour(str);
+		std::string c = std::string(color.GetAsString().mb_str());
+		if (c == "black") {
+			control->SetForegroundColour("white");
+		}
+	} else {
+		control->SetForegroundColour(color);
+		wxString bgs = inputBackgroundColor->GetValue();
+		wxColour bg(bgs);
+		control->SetBackgroundColour(bg);
+	}
+}
+
+void SettingsFrame::OnColorButton(wxTextCtrl* textControl, wxColour* color) {
+	bool colorPassed = true;
+	if (color == NULL) {
+		colorPassed = false;
+		color = new wxColour();
+	}
 	wxString currentSetting = textControl->GetValue();
 	wxColour currentColor(currentSetting);
 	wxColourData colorData;
@@ -242,8 +281,12 @@ void SettingsFrame::OnColorButton(wxTextCtrl* textControl) {
 	wxColourDialog dlg(this, &colorData);
 	if (dlg.ShowModal() == wxID_OK) {
 		wxColourData data = dlg.GetColourData();
-		wxColour color = data.GetColour();
-		textControl->SetValue(color.GetAsString());
+		*color = data.GetColour();
+		textControl->SetValue(color->GetAsString());
+		SetControlColors(textControl);
+	}
+	if (!colorPassed) {
+		delete color;
 	}
 }
 

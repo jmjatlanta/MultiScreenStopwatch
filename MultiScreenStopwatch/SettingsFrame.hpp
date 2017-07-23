@@ -19,14 +19,6 @@ class SettingsFrame : public wxFrame
 public:
 	SettingsFrame(const wxString& window_title);
 	~SettingsFrame();
-	void OnButtonStart(wxCommandEvent& event);
-	void OnButtonStop(wxCommandEvent& event);
-	void OnButtonHide(wxCommandEvent& event);
-	void OnButtonBackgroundColor(wxCommandEvent& event);
-	void OnButtonForegroundColorNormal(wxCommandEvent& event);
-	void OnButtonForegroundColorWarning(wxCommandEvent& event);
-	void OnButtonForegroundColorError(wxCommandEvent& event);
-	void OnColorButton(wxTextCtrl* textControl);
 	DECLARE_EVENT_TABLE()
 private:
 	/////////////
@@ -52,6 +44,15 @@ private:
 	std::chrono::seconds getDuration(std::string input);
 	// respond to a timer event
 	void OnTimer(wxTimerEvent &event);
+	void OnButtonStart(wxCommandEvent& event);
+	void OnButtonStop(wxCommandEvent& event);
+	void OnButtonHide(wxCommandEvent& event);
+	void OnButtonBackgroundColor(wxCommandEvent& event);
+	void OnButtonForegroundColorNormal(wxCommandEvent& event);
+	void OnButtonForegroundColorWarning(wxCommandEvent& event);
+	void OnButtonForegroundColorError(wxCommandEvent& event);
+	void OnColorButton(wxTextCtrl* textControl, wxColour* color = NULL);
+	void SetControlColors(wxTextCtrl* control);
 private:
 	//////////
 	// UI pieces
