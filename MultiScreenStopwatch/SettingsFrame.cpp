@@ -14,8 +14,8 @@
 #include <wx/generic/fontdlgg.h>
 #include <wx/colordlg.h>
 
-SettingsFrame::SettingsFrame(const wxString& window_title)
-	: wxFrame(NULL, -1, window_title, wxPoint(-1, -1), wxSize(540, 540))
+SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
+: wxFrame(NULL, -1, window_title, *start_point, wxSize(540, 540)), displayingTime(false), startPoint(start_point)
 {
 	currentTimerFrame = nullptr;
 	normalColor = nullptr;
@@ -40,11 +40,11 @@ SettingsFrame::SettingsFrame(const wxString& window_title)
 	textTimerDisplaying = new wxStaticText(panel, -1, SecondTimer::ToString(0));
 	// text controls
 	inputScreenNumber = new wxTextCtrl(panel, -1);
-	inputScreenNumber->SetValue(_T("2"));
+	inputScreenNumber->SetValue(_T("0"));
 	inputTimerMinutes = new wxTextCtrl(panel, -1);
-	inputTimerMinutes->SetValue(_T("1:00"));
+	inputTimerMinutes->SetValue(_T("12:00"));
 	inputWarningTime = new wxTextCtrl(panel, -1);
-	inputWarningTime->SetValue("0:30");
+	inputWarningTime->SetValue("1:00");
 	inputBackgroundColor = new wxTextCtrl(panel, -1);
 	inputBackgroundColor->SetValue("black");
 	SetControlColors(inputBackgroundColor);
@@ -151,6 +151,12 @@ SettingsFrame::~SettingsFrame()
 	delete secondTimer;
 }
 
+bool SettingsFrame::Show(bool show) {
+	bool retVal = wxFrame::Show(show);
+	this->Move(startPoint->x, startPoint->y);
+	return retVal;
+}
+
 BEGIN_EVENT_TABLE(SettingsFrame, wxFrame)
 EVT_BUTTON (BUTTON_Start, SettingsFrame::OnButtonStart)
 EVT_BUTTON (BUTTON_Stop, SettingsFrame::OnButtonStop)
@@ -161,10 +167,27 @@ EVT_BUTTON (BUTTON_ForegroundColorWarning, SettingsFrame::OnButtonForegroundColo
 EVT_BUTTON (BUTTON_ForegroundColorError, SettingsFrame::OnButtonForegroundColorError)
 END_EVENT_TABLE()
 
+wxPoint* SettingsFrame::GetDefaultLocation(int displayNumber) {
+	// validate the screen number
+	int numDisplays = wxDisplay::GetCount();
+	if (displayNumber > numDisplays)
+		return new wxPoint(-1, -1);
+	
+	wxDisplay *chosenDisplay = new wxDisplay((int)displayNumber);
+	wxRect* chosenGeometry = new wxRect(chosenDisplay->GetGeometry());
+
+	wxPoint* point = new wxPoint(chosenGeometry->x, chosenGeometry->y);
+	
+	delete chosenGeometry;
+	delete chosenDisplay;
+	return point;
+}
+
 void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 {
 	// validate the information
 	long displayNumber = -1;
+	
 	
 	wxString strValue = inputScreenNumber->GetValue();
 	if (!strValue.ToLong(&displayNumber) || displayNumber < 0)
@@ -192,6 +215,8 @@ void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 	if (currentTimerFrame == nullptr)
 		currentTimerFrame = createTimerOnDisplay((int)displayNumber);
 
+	displayingTime = false;
+	currentTimerFrame->SetDisplayTime(displayingTime);
 	// give me back focus
 	this->SetFocus();
 	
@@ -216,11 +241,19 @@ void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 	this->warningTime = this->errorTime - getDuration(strValue.ToStdString());
 }
 
+/***
+ * stops the timer, and displays the current time.
+ */
 void SettingsFrame::OnButtonStop(wxCommandEvent &event)
 {
-	secondTimer->StopTimer();
+	displayingTime = true;
+	if (currentTimerFrame != nullptr)
+		currentTimerFrame->SetDisplayTime(displayingTime);
 }
 
+/***
+ * close down the remote "dialog"
+ **/
 void SettingsFrame::OnButtonHide(wxCommandEvent &event)
 {
 	secondTimer->StopTimer();
@@ -248,6 +281,9 @@ void SettingsFrame::OnButtonForegroundColorError(wxCommandEvent &event) {
 	OnColorButton(inputForegroundColorError);
 }
 
+/***
+ *
+ **/
 void SettingsFrame::SetControlColors(wxTextCtrl *control)
 {
 	// convert text to wxColor
@@ -268,6 +304,9 @@ void SettingsFrame::SetControlColors(wxTextCtrl *control)
 	}
 }
 
+/***
+ * Handles someone clicking a color button
+ **/
 void SettingsFrame::OnColorButton(wxTextCtrl* textControl, wxColour* color) {
 	bool colorPassed = true;
 	if (color == NULL) {
@@ -290,40 +329,45 @@ void SettingsFrame::OnColorButton(wxTextCtrl* textControl, wxColour* color) {
 	}
 }
 
+/***
+ * This actually goes out and creates a TimerFrame "dialog"
+ **/
 TimerFrame* SettingsFrame::createTimerOnDisplay(int displayNumber)
 {
-	wxDisplay *chosenDisplay = new wxDisplay((int)displayNumber);
-	wxRect* chosenGeometry = new wxRect(chosenDisplay->GetGeometry());
-	
-	TimerFrame *timerFrame = new TimerFrame(this, secondTimer);
-	timerFrame->Move(chosenGeometry->x, chosenGeometry->y);
-	timerFrame->SetSize(chosenGeometry->width, chosenGeometry->height);
-	timerFrame->Show();
-	
-	delete chosenGeometry;
-	delete chosenDisplay;
-	
+	TimerFrame *timerFrame = new TimerFrame(this, secondTimer, displayNumber);
 	return timerFrame;
 }
 
+/***
+ * The timer threw an event
+ **/
 void SettingsFrame::OnTimer(wxTimerEvent &Event)
 {
-	if (currentTimerFrame != nullptr) {
-		// see if we need to change the color
-		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-		wxColour *currentColor = normalColor;
-		if (now >= warningTime) {
-			if (now >= errorTime)
-				currentColor = errorColor;
-			else
-				currentColor = warningColor;
-			currentTimerFrame->SetForegroundColour(*currentColor);
+	wxColour *currentColor = normalColor;
+	currentTimerFrame->SetForegroundColour(*currentColor);
+	if (displayingTime) {
+		textTimerDisplaying->SetLabel(SecondTimer::ToString());
+	} else {
+		if (currentTimerFrame != nullptr) {
+			// see if we need to change the color
+			std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+			if (now >= warningTime) {
+				if (now >= errorTime)
+					currentColor = errorColor;
+				else
+					currentColor = warningColor;
+				currentTimerFrame->SetForegroundColour(*currentColor);
+			}
 		}
+		textTimerDisplaying->SetLabel(SecondTimer::ToString(secondTimer->SecondsSinceStart()));
 	}
-	textTimerDisplaying->SetLabel(SecondTimer::ToString(secondTimer->SecondsSinceStart()));
-	Event.Skip();
+	// continue processing other event handlers
+	Event.Skip(true);
 }
 
+/***
+ * convert a string as MM:SS or simply MM to seconds
+ **/
 std::chrono::seconds SettingsFrame::getDuration(std::string input)
 {
 	std::stringstream ss(input);

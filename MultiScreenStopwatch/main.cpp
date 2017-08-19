@@ -29,7 +29,8 @@ wxIMPLEMENT_APP(MyApp);
  */
 bool MyApp::OnInit()
 {
-	SettingsFrame* settingsFrame = new SettingsFrame("Timer Settings");
+	wxPoint* dialogPoint = SettingsFrame::GetDefaultLocation(1);
+	SettingsFrame* settingsFrame = new SettingsFrame("Timer Settings", dialogPoint);
 	settingsFrame->Show();
 	return true;
 }

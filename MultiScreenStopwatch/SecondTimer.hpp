@@ -57,6 +57,10 @@ public:
 	 * @returns a formatted string in the format MM:00
 	 */
 	static std::string ToString(const int minutes);
+	/**
+	 * Converts the current time to HH:MM:SS
+	 **/
+	static std::string ToString();
 private:
 	std::chrono::system_clock::time_point startTime;
 	std::chrono::system_clock::time_point stopTime;

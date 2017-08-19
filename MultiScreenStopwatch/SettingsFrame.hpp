@@ -12,13 +12,14 @@
 #include <chrono>
 #include "TimerFrame.hpp"
 #include "SecondTimer.hpp"
-#include "TextControl.hpp"
 
 class SettingsFrame : public wxFrame
 {
 public:
-	SettingsFrame(const wxString& window_title);
+	SettingsFrame(const wxString& window_title, wxPoint* startPos);
 	~SettingsFrame();
+	static wxPoint* GetDefaultLocation(int displayNumber);
+	bool Show(bool show=true);
 	DECLARE_EVENT_TABLE()
 private:
 	/////////////
@@ -34,6 +35,8 @@ private:
 	wxColour *normalColor;
 	wxColour *warningColor;
 	wxColour *errorColor;
+	bool displayingTime;
+	wxPoint* startPoint;
 private:
 	////////////
 	// Private methods

@@ -7,6 +7,7 @@
  **/
 #include "SecondTimer.hpp"
 #include <sstream>
+#include <time.h>
 
 /**
  * Default constructor
@@ -79,11 +80,18 @@ std::chrono::seconds SecondTimer::SecondsSinceStart()
 std::string SecondTimer::ToString(const std::chrono::seconds secs)
 {
 	std::chrono::seconds temp = secs;
+	std::chrono::hours hrs = std::chrono::duration_cast<std::chrono::hours>(temp);
+	temp -= hrs;
 	std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(temp);
 	temp -= min;
 	std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(temp);
 
 	std::stringstream ss;
+	if (hrs.count() > 0) {
+		if (hrs > std::chrono::hours(10))
+			ss << "0";
+		ss << hrs.count() << ":";
+	}
 	if (min < std::chrono::minutes(10))
 		ss << "0";
 	ss << min.count() << ":";
@@ -104,5 +112,30 @@ std::string SecondTimer::ToString(int minutes)
 		ss << "0";
 	ss << minutes;
 	ss << ":00";
+	return ss.str();
+}
+
+/***
+ * Turns the current time into HH::MM:SS
+ */
+std::string SecondTimer::ToString() {
+	std::time_t t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	struct tm* tm = localtime(&t);
+	// hour
+	int hour = tm->tm_hour;
+	if (hour > 12)
+		hour -= 12;
+	std::stringstream ss;
+	if (tm->tm_hour < 10)
+		ss << "0";
+	ss << hour << ":";
+	// minutes
+	if (tm->tm_min < 10)
+		ss << "0";
+	ss << tm->tm_min << ":";
+	//seconds
+	if (tm->tm_sec < 10)
+		ss << "0";
+	ss << tm->tm_sec;
 	return ss.str();
 }
