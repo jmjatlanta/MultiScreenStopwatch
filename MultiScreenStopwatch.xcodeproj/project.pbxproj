@@ -7,103 +7,134 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF77B1291F227CC20007A7FF /* TextControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1201F227CC20007A7FF /* TextControl.cpp */; };
-		AF77B12A1F227CC20007A7FF /* SettingsFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */; };
-		AF77B12B1F227CC20007A7FF /* SecondTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1241F227CC20007A7FF /* SecondTimer.cpp */; };
-		AF77B12C1F227CC20007A7FF /* TimerFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1261F227CC20007A7FF /* TimerFrame.cpp */; };
-		AF77B12D1F227CC20007A7FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1281F227CC20007A7FF /* main.cpp */; };
+		AF3294AA1F41BB46002F85C5 /* SettingsFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */; };
+		AF3294AD1F41BB46002F85C5 /* SecondTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1241F227CC20007A7FF /* SecondTimer.cpp */; };
+		AF3294AE1F41BB46002F85C5 /* SecondTimer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1251F227CC20007A7FF /* SecondTimer.hpp */; };
+		AF3294AF1F41BB46002F85C5 /* TimerFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1261F227CC20007A7FF /* TimerFrame.cpp */; };
+		AF3294B11F41BB46002F85C5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF77B1281F227CC20007A7FF /* main.cpp */; };
+		AF3294CB1F41CFE3002F85C5 /* libwx_baseu-3.0.0.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF3294CA1F41CFE3002F85C5 /* libwx_baseu-3.0.0.2.0.dylib */; };
+		AF3294CD1F41CFF0002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF3294CC1F41CFF0002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib */; };
+		AF3294CE1F41D19B002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF3294CC1F41CFF0002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF3294CF1F41D19B002F85C5 /* libwx_baseu-3.0.0.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF3294CA1F41CFE3002F85C5 /* libwx_baseu-3.0.0.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AFB205A11F466F1F004FA2B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB205A01F466F1F004FA2B6 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AF7887BB1EE9DEBF000E12A2 /* CopyFiles */ = {
+		AF3294C31F41CD88002F85C5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = "";
+			dstSubfolderSpec = 10;
 			files = (
+				AF3294CE1F41D19B002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib in CopyFiles */,
+				AF3294CF1F41D19B002F85C5 /* libwx_baseu-3.0.0.2.0.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AF3294951F41BAB4002F85C5 /* Multiscreen Stopwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Multiscreen Stopwatch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF3294A51F41BAB4002F85C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF3294CA1F41CFE3002F85C5 /* libwx_baseu-3.0.0.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libwx_baseu-3.0.0.2.0.dylib"; path = "../../../../../usr/local/Cellar/wxmac/3.0.2_4/lib/libwx_baseu-3.0.0.2.0.dylib"; sourceTree = "<group>"; };
+		AF3294CC1F41CFF0002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libwx_osx_cocoau_core-3.0.0.2.0.dylib"; path = "../../../../../usr/local/Cellar/wxmac/3.0.2_4/lib/libwx_osx_cocoau_core-3.0.0.2.0.dylib"; sourceTree = "<group>"; };
 		AF77B11F1F227CC20007A7FF /* ToDo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ToDo.txt; path = MultiScreenStopwatch/ToDo.txt; sourceTree = SOURCE_ROOT; };
-		AF77B1201F227CC20007A7FF /* TextControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextControl.cpp; path = MultiScreenStopwatch/TextControl.cpp; sourceTree = SOURCE_ROOT; };
 		AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SettingsFrame.cpp; path = MultiScreenStopwatch/SettingsFrame.cpp; sourceTree = SOURCE_ROOT; };
-		AF77B1221F227CC20007A7FF /* TextControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextControl.hpp; path = MultiScreenStopwatch/TextControl.hpp; sourceTree = SOURCE_ROOT; };
 		AF77B1231F227CC20007A7FF /* SettingsFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SettingsFrame.hpp; path = MultiScreenStopwatch/SettingsFrame.hpp; sourceTree = SOURCE_ROOT; };
 		AF77B1241F227CC20007A7FF /* SecondTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecondTimer.cpp; path = MultiScreenStopwatch/SecondTimer.cpp; sourceTree = SOURCE_ROOT; };
 		AF77B1251F227CC20007A7FF /* SecondTimer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SecondTimer.hpp; path = MultiScreenStopwatch/SecondTimer.hpp; sourceTree = SOURCE_ROOT; };
 		AF77B1261F227CC20007A7FF /* TimerFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerFrame.cpp; path = MultiScreenStopwatch/TimerFrame.cpp; sourceTree = SOURCE_ROOT; };
 		AF77B1271F227CC20007A7FF /* TimerFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TimerFrame.hpp; path = MultiScreenStopwatch/TimerFrame.hpp; sourceTree = SOURCE_ROOT; };
 		AF77B1281F227CC20007A7FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = MultiScreenStopwatch/main.cpp; sourceTree = SOURCE_ROOT; };
-		AF7887BD1EE9DEBF000E12A2 /* MultiScreenStopwatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MultiScreenStopwatch; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB205A01F466F1F004FA2B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AFB205A21F467B16004FA2B6 /* Multiscreen Stopwatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Multiscreen Stopwatch.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AF7887BA1EE9DEBF000E12A2 /* Frameworks */ = {
+		AF3294921F41BAB4002F85C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3294CD1F41CFF0002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib in Frameworks */,
+				AF3294CB1F41CFE3002F85C5 /* libwx_baseu-3.0.0.2.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AF7887B41EE9DEBF000E12A2 = {
+		AF3294961F41BAB4002F85C5 /* Multiscreen Stopwatch */ = {
 			isa = PBXGroup;
 			children = (
-				AF7887BF1EE9DEBF000E12A2 /* MultiScreenStopwatch */,
-				AF7887BE1EE9DEBF000E12A2 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		AF7887BE1EE9DEBF000E12A2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF7887BD1EE9DEBF000E12A2 /* MultiScreenStopwatch */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AF7887BF1EE9DEBF000E12A2 /* MultiScreenStopwatch */ = {
-			isa = PBXGroup;
-			children = (
+				AFB205A21F467B16004FA2B6 /* Multiscreen Stopwatch.entitlements */,
+				AFB205A01F466F1F004FA2B6 /* Assets.xcassets */,
 				AF77B11F1F227CC20007A7FF /* ToDo.txt */,
-				AF77B1201F227CC20007A7FF /* TextControl.cpp */,
 				AF77B1211F227CC20007A7FF /* SettingsFrame.cpp */,
-				AF77B1221F227CC20007A7FF /* TextControl.hpp */,
 				AF77B1231F227CC20007A7FF /* SettingsFrame.hpp */,
 				AF77B1241F227CC20007A7FF /* SecondTimer.cpp */,
 				AF77B1251F227CC20007A7FF /* SecondTimer.hpp */,
 				AF77B1261F227CC20007A7FF /* TimerFrame.cpp */,
 				AF77B1271F227CC20007A7FF /* TimerFrame.hpp */,
 				AF77B1281F227CC20007A7FF /* main.cpp */,
+				AF3294A51F41BAB4002F85C5 /* Info.plist */,
+				AF32949A1F41BAB4002F85C5 /* Supporting Files */,
 			);
-			name = MultiScreenStopwatch;
-			path = TestWxWidgets;
+			path = "Multiscreen Stopwatch";
+			sourceTree = "<group>";
+		};
+		AF32949A1F41BAB4002F85C5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF3294B21F41C4C7002F85C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF3294CC1F41CFF0002F85C5 /* libwx_osx_cocoau_core-3.0.0.2.0.dylib */,
+				AF3294CA1F41CFE3002F85C5 /* libwx_baseu-3.0.0.2.0.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF7887B41EE9DEBF000E12A2 = {
+			isa = PBXGroup;
+			children = (
+				AF3294961F41BAB4002F85C5 /* Multiscreen Stopwatch */,
+				AF7887BE1EE9DEBF000E12A2 /* Products */,
+				AF3294B21F41C4C7002F85C5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AF7887BE1EE9DEBF000E12A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF3294951F41BAB4002F85C5 /* Multiscreen Stopwatch.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF7887BC1EE9DEBF000E12A2 /* MultiScreenStopwatch */ = {
+		AF3294941F41BAB4002F85C5 /* Multiscreen Stopwatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF7887C41EE9DEBF000E12A2 /* Build configuration list for PBXNativeTarget "MultiScreenStopwatch" */;
+			buildConfigurationList = AF3294A61F41BAB4002F85C5 /* Build configuration list for PBXNativeTarget "Multiscreen Stopwatch" */;
 			buildPhases = (
-				AF7887B91EE9DEBF000E12A2 /* Sources */,
-				AF7887BA1EE9DEBF000E12A2 /* Frameworks */,
-				AF7887BB1EE9DEBF000E12A2 /* CopyFiles */,
+				AF3294911F41BAB4002F85C5 /* Sources */,
+				AF3294921F41BAB4002F85C5 /* Frameworks */,
+				AF3294931F41BAB4002F85C5 /* Resources */,
+				AF3294C31F41CD88002F85C5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MultiScreenStopwatch;
-			productName = TestWxWidgets;
-			productReference = AF7887BD1EE9DEBF000E12A2 /* MultiScreenStopwatch */;
-			productType = "com.apple.product-type.tool";
+			name = "Multiscreen Stopwatch";
+			productName = "Multiscreen Stopwatch";
+			productReference = AF3294951F41BAB4002F85C5 /* Multiscreen Stopwatch.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -114,9 +145,15 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = JMJAtlanta;
 				TargetAttributes = {
-					AF7887BC1EE9DEBF000E12A2 = {
+					AF3294941F41BAB4002F85C5 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 7UDN44DVQ8;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -126,33 +163,161 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = AF7887B41EE9DEBF000E12A2;
 			productRefGroup = AF7887BE1EE9DEBF000E12A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF7887BC1EE9DEBF000E12A2 /* MultiScreenStopwatch */,
+				AF3294941F41BAB4002F85C5 /* Multiscreen Stopwatch */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		AF3294931F41BAB4002F85C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFB205A11F466F1F004FA2B6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		AF7887B91EE9DEBF000E12A2 /* Sources */ = {
+		AF3294911F41BAB4002F85C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF77B12A1F227CC20007A7FF /* SettingsFrame.cpp in Sources */,
-				AF77B12C1F227CC20007A7FF /* TimerFrame.cpp in Sources */,
-				AF77B12B1F227CC20007A7FF /* SecondTimer.cpp in Sources */,
-				AF77B1291F227CC20007A7FF /* TextControl.cpp in Sources */,
-				AF77B12D1F227CC20007A7FF /* main.cpp in Sources */,
+				AF3294AA1F41BB46002F85C5 /* SettingsFrame.cpp in Sources */,
+				AF3294AD1F41BB46002F85C5 /* SecondTimer.cpp in Sources */,
+				AF3294AE1F41BB46002F85C5 /* SecondTimer.hpp in Sources */,
+				AF3294AF1F41BB46002F85C5 /* TimerFrame.cpp in Sources */,
+				AF3294B11F41BB46002F85C5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		AF3294A71F41BAB4002F85C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Multiscreen Stopwatch/Multiscreen Stopwatch.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"/usr/local/Cellar/wxmac/3.0.2_4/lib/wx/include/osx_cocoa-unicode-3.0",
+					"/usr/local/Cellar/wxmac/3.0.2_4/include/wx-3.0",
+				);
+				INFOPLIST_FILE = "Multiscreen Stopwatch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/wxmac/3.0.2_4/lib,
+					"$(PROJECT_DIR)",
+				);
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = (
+					"-I/usr/local/Cellar/wxmac/lib/wx/include/osx_cocoa-unicode-3.0",
+					"-I/usr/local/Cellar/wxmac/3.0.2_4/include/wx-3.0",
+					"-D_FILE_OFFSET_BITS=64",
+					"-DWXUSINGDLL",
+					"-D__WXMAC__",
+					"-D__WXOSX__",
+					"-D__WXOSX_COCOA__",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-L/usr/local/lib",
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					System,
+					"-framework",
+					OpenGL,
+					"-lwx_osx_cocoau_xrc-3.0",
+					"-lwx_osx_cocoau_webview-3.0",
+					"-lwx_osx_cocoau_html-3.0",
+					"-lwx_osx_cocoau_qa-3.0",
+					"-lwx_osx_cocoau_adv-3.0",
+					"-lwx_osx_cocoau_core-3.0",
+					"-lwx_baseu_xml-3.0",
+					"-lwx_baseu_net-3.0",
+					"-lwx_baseu-3.0",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmjatlanta.StopwatchMultiscreen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		AF3294A81F41BAB4002F85C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Multiscreen Stopwatch/Multiscreen Stopwatch.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"/usr/local/Cellar/wxmac/3.0.2_4/lib/wx/include/osx_cocoa-unicode-3.0",
+					"/usr/local/Cellar/wxmac/3.0.2_4/include/wx-3.0",
+				);
+				INFOPLIST_FILE = "Multiscreen Stopwatch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/wxmac/3.0.2_4/lib,
+					"$(PROJECT_DIR)",
+				);
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = (
+					"-I/Users/JohnJones/Development/cpp/wxWidgets/lib/wx/include/osx_cocoa-unicode-3.1",
+					"-I/Users/JohnJones/Development/cpp/wxWidgets/include",
+					"-D_FILE_OFFSET_BITS=64",
+					"-DWXUSINGDLL",
+					"-D__WXMAC__",
+					"-D__WXOSX__",
+					"-D__WXOSX_COCOA__",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-L/usr/local/lib",
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					System,
+					"-framework",
+					OpenGL,
+					"-lwx_osx_cocoau_xrc-3.0",
+					"-lwx_osx_cocoau_webview-3.0",
+					"-lwx_osx_cocoau_html-3.0",
+					"-lwx_osx_cocoau_qa-3.0",
+					"-lwx_osx_cocoau_adv-3.0",
+					"-lwx_osx_cocoau_core-3.0",
+					"-lwx_baseu_xml-3.0",
+					"-lwx_baseu_net-3.0",
+					"-lwx_baseu-3.0",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmjatlanta.StopwatchMultiscreen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
 		AF7887C21EE9DEBF000E12A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -242,103 +407,23 @@
 			};
 			name = Release;
 		};
-		AF7887C51EE9DEBF000E12A2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"OTHER_CPLUSPLUSFLAGS[arch=*]" = (
-					"-I/usr/local/lib/wx/include/osx_cocoa-unicode-3.0",
-					"-I/usr/local/include/wx-3.0",
-					"-D_FILE_OFFSET_BITS=64",
-					"-DWXUSINGDLL",
-					"-D__WXMAC__",
-					"-D__WXOSX__",
-					"-D__WXOSX_COCOA__",
-				);
-				"OTHER_LDFLAGS[arch=*]" = (
-					"-L/usr/local/lib",
-					"-framework",
-					IOKit,
-					"-framework",
-					Carbon,
-					"-framework",
-					Cocoa,
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					System,
-					"-framework",
-					OpenGL,
-					"-lwx_osx_cocoau_xrc-3.0",
-					"-lwx_osx_cocoau_webview-3.0",
-					"-lwx_osx_cocoau_html-3.0",
-					"-lwx_osx_cocoau_qa-3.0",
-					"-lwx_osx_cocoau_adv-3.0",
-					"-lwx_osx_cocoau_core-3.0",
-					"-lwx_baseu_xml-3.0",
-					"-lwx_baseu_net-3.0",
-					"-lwx_baseu-3.0",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		AF7887C61EE9DEBF000E12A2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				OTHER_CPLUSPLUSFLAGS = (
-					"-I/usr/local/lib/wx/include/osx_cocoa-unicode-3.0",
-					"-I/usr/local/include/wx-3.0",
-					"-D_FILE_OFFSET_BITS=64",
-					"-DWXUSINGDLL",
-					"-D__WXMAC__",
-					"-D__WXOSX__",
-					"-D__WXOSX_COCOA__",
-				);
-				OTHER_LDFLAGS = (
-					"-L/usr/local/lib",
-					"-framework",
-					IOKit,
-					"-framework",
-					Carbon,
-					"-framework",
-					Cocoa,
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					System,
-					"-framework",
-					OpenGL,
-					"-lwx_osx_cocoau_xrc-3.0",
-					"-lwx_osx_cocoau_webview-3.0",
-					"-lwx_osx_cocoau_html-3.0",
-					"-lwx_osx_cocoau_qa-3.0",
-					"-lwx_osx_cocoau_adv-3.0",
-					"-lwx_osx_cocoau_core-3.0",
-					"-lwx_baseu_xml-3.0",
-					"-lwx_baseu_net-3.0",
-					"-lwx_baseu-3.0",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AF3294A61F41BAB4002F85C5 /* Build configuration list for PBXNativeTarget "Multiscreen Stopwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF3294A71F41BAB4002F85C5 /* Debug */,
+				AF3294A81F41BAB4002F85C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AF7887B81EE9DEBF000E12A2 /* Build configuration list for PBXProject "MultiScreenStopwatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF7887C21EE9DEBF000E12A2 /* Debug */,
 				AF7887C31EE9DEBF000E12A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AF7887C41EE9DEBF000E12A2 /* Build configuration list for PBXNativeTarget "MultiScreenStopwatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AF7887C51EE9DEBF000E12A2 /* Debug */,
-				AF7887C61EE9DEBF000E12A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
