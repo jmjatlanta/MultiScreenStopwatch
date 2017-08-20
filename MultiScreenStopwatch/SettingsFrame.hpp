@@ -12,6 +12,7 @@
 #include <chrono>
 #include "TimerFrame.hpp"
 #include "SecondTimer.hpp"
+#include "IdentifierDialog.hpp"
 
 class SettingsFrame : public wxFrame
 {
@@ -37,12 +38,12 @@ private:
 	wxColour *errorColor;
 	bool displayingTime;
 	wxPoint* startPoint;
+	IdentifierDialog **identifierDialogs;
+	int numIdentifierDialogs;
 private:
 	////////////
 	// Private methods
 	////////////
-	// put the TimerFrame on a particular display
-	TimerFrame* createTimerOnDisplay(int displayNumber);
 	// turn string of mm:ss into duration
 	std::chrono::seconds getDuration(std::string input);
 	// respond to a timer event
@@ -50,12 +51,17 @@ private:
 	void OnButtonStart(wxCommandEvent& event);
 	void OnButtonStop(wxCommandEvent& event);
 	void OnButtonHide(wxCommandEvent& event);
+	void OnButtonDisplayIdentifier(wxCommandEvent& event);
 	void OnButtonBackgroundColor(wxCommandEvent& event);
 	void OnButtonForegroundColorNormal(wxCommandEvent& event);
 	void OnButtonForegroundColorWarning(wxCommandEvent& event);
 	void OnButtonForegroundColorError(wxCommandEvent& event);
 	void OnColorButton(wxTextCtrl* textControl, wxColour* color = NULL);
 	void SetControlColors(wxTextCtrl* control);
+	/**
+	 * Display small dialog boxes on each screen for a few seconds
+	 */
+	void displayIdentifiers();
 private:
 	//////////
 	// UI pieces
@@ -88,6 +94,7 @@ private:
 	wxButton *buttonStart;
 	wxButton *buttonStop;
 	wxButton *buttonHide;
+	wxButton *buttonDisplayIdentifier;
 };
 
 enum
@@ -98,7 +105,8 @@ enum
 	BUTTON_BackgroundColor = BUTTON_Start + 3,
 	BUTTON_ForegroundColorNormal = BUTTON_Start + 4,
 	BUTTON_ForegroundColorWarning = BUTTON_Start + 5,
-	BUTTON_ForegroundColorError = BUTTON_Start + 6
+	BUTTON_ForegroundColorError = BUTTON_Start + 6,
+	BUTTON_Display_Identifier = BUTTON_Start + 7
 };
 
 

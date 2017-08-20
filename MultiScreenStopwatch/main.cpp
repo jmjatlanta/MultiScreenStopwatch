@@ -32,6 +32,7 @@ bool MyApp::OnInit()
 	wxPoint* dialogPoint = SettingsFrame::GetDefaultLocation(1);
 	SettingsFrame* settingsFrame = new SettingsFrame("Timer Settings", dialogPoint);
 	settingsFrame->Show();
+	delete dialogPoint;
 	return true;
 }
 

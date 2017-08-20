@@ -13,7 +13,11 @@
 #include <wx/fontdlg.h>
 #include <wx/generic/fontdlgg.h>
 #include <wx/colordlg.h>
+#include "IdentifierDialog.hpp"
 
+/**
+ * Constructor
+ */
 SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
 : wxFrame(NULL, -1, window_title, *start_point, wxSize(540, 540)), displayingTime(false), startPoint(start_point)
 {
@@ -21,6 +25,8 @@ SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
 	normalColor = nullptr;
 	warningColor = nullptr;
 	errorColor = nullptr;
+	identifierDialogs = nullptr;
+	numIdentifierDialogs = 0;
 	secondTimer = new SecondTimer();
 	secondTimer->Bind(wxEVT_TIMER, &SettingsFrame::OnTimer, this);
 	
@@ -61,6 +67,7 @@ SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
 	buttonStart = new wxButton(panel, BUTTON_Start, _T("Start"));
 	buttonStop  = new wxButton(panel, BUTTON_Stop,  _T("Stop"));
 	buttonHide  = new wxButton(panel, BUTTON_Hide, _T("Hide"));
+	buttonDisplayIdentifier = new wxButton(panel, BUTTON_Display_Identifier, _T("Show Display Identifiers"));
 	buttonBackgroundColor = new wxButton(panel, BUTTON_BackgroundColor, _T("C"));
 	buttonForegroundColorNormal = new wxButton(panel, BUTTON_ForegroundColorNormal, _T("C"));
 	buttonForegroundColorWarning = new wxButton(panel, BUTTON_ForegroundColorWarning, _T("C"));
@@ -101,7 +108,7 @@ SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
 	flex_grid_sizer->AddSpacer(0);
 	// row 8
 	flex_grid_sizer->Add(buttonHide);
-	flex_grid_sizer->AddStretchSpacer();
+	flex_grid_sizer->Add(buttonDisplayIdentifier, 1, wxEXPAND);
 	flex_grid_sizer->AddSpacer(0);
 	// row 9
 	flex_grid_sizer->Add(textTimerDisplaying);
@@ -117,8 +124,12 @@ SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
 	horizontal_box->Add(flex_grid_sizer, 1, wxALL | wxEXPAND, 15);
 	panel->SetSizer(horizontal_box);
 	Center();
+	
 }
 
+/***
+ * Destructor
+ */
 SettingsFrame::~SettingsFrame()
 {
 	// labels
@@ -140,6 +151,8 @@ SettingsFrame::~SettingsFrame()
 	// buttons
 	buttonStart->Destroy();
 	buttonStop->Destroy();
+	buttonHide->Destroy();
+	buttonDisplayIdentifier->Destroy();
 	buttonBackgroundColor->Destroy();
 	buttonForegroundColorNormal->Destroy();
 	buttonForegroundColorWarning->Destroy();
@@ -151,6 +164,13 @@ SettingsFrame::~SettingsFrame()
 	delete secondTimer;
 }
 
+/**
+ * Display the SettingsFrame. This override is so that we move the
+ * settings frame to the correct display.
+ *
+ * @param show true to show, false to hide
+ * @returns the results
+ */
 bool SettingsFrame::Show(bool show) {
 	bool retVal = wxFrame::Show(show);
 	this->Move(startPoint->x, startPoint->y);
@@ -161,12 +181,19 @@ BEGIN_EVENT_TABLE(SettingsFrame, wxFrame)
 EVT_BUTTON (BUTTON_Start, SettingsFrame::OnButtonStart)
 EVT_BUTTON (BUTTON_Stop, SettingsFrame::OnButtonStop)
 EVT_BUTTON (BUTTON_Hide, SettingsFrame::OnButtonHide)
+EVT_BUTTON (BUTTON_Display_Identifier, SettingsFrame::OnButtonDisplayIdentifier)
 EVT_BUTTON (BUTTON_BackgroundColor, SettingsFrame::OnButtonBackgroundColor)
 EVT_BUTTON (BUTTON_ForegroundColorNormal, SettingsFrame::OnButtonForegroundColorNormal)
 EVT_BUTTON (BUTTON_ForegroundColorWarning, SettingsFrame::OnButtonForegroundColorWarning)
 EVT_BUTTON (BUTTON_ForegroundColorError, SettingsFrame::OnButtonForegroundColorError)
 END_EVENT_TABLE()
 
+
+/**
+ * static method - Based on the display number, get the default location for a potential SettingsFrame
+ * @param displayNumber which display will the application be put on
+ * @returns the point to use to display the SettingsFrame on that display
+ */
 wxPoint* SettingsFrame::GetDefaultLocation(int displayNumber) {
 	// validate the screen number
 	int numDisplays = wxDisplay::GetCount();
@@ -183,6 +210,44 @@ wxPoint* SettingsFrame::GetDefaultLocation(int displayNumber) {
 	return point;
 }
 
+/**
+ * Display small dialog boxes on each screen
+ */
+void SettingsFrame::OnButtonDisplayIdentifier(wxCommandEvent &event) {
+	if (identifierDialogs == nullptr) {
+		unsigned int numDisplays = wxDisplay::GetCount();
+		identifierDialogs = (IdentifierDialog**)malloc(sizeof(IdentifierDialog) * numDisplays);
+		numIdentifierDialogs = numDisplays;
+		for (int i = 0; i < numDisplays; i++) {
+			wxDisplay *currDisplay = new wxDisplay(i);
+			wxRect *currentGeometry = new wxRect(currDisplay->GetGeometry());
+			wxPoint currentPoint(currentGeometry->x, currentGeometry->y);// = new wxPoint(currentGeometry->x, currentGeometry->y);
+			delete currentGeometry;
+			delete currDisplay;
+			std::stringstream ss;
+			ss << "Display Number " << i;
+			std::string title = ss.str();
+			IdentifierDialog *dlg = new IdentifierDialog(NULL, -1, title, currentPoint, wxSize(150, 25));
+			identifierDialogs[i] = dlg;
+			// change the text of the button
+			buttonDisplayIdentifier->SetLabel("Hide Display Identifiers");
+		}
+	} else {
+		for(int i = 0; i < numIdentifierDialogs; i++) {
+			IdentifierDialog *dlg = identifierDialogs[i];
+			dlg->Hide();
+			delete dlg;
+		}
+		delete identifierDialogs;
+		identifierDialogs = nullptr;
+		buttonDisplayIdentifier->SetLabel("Show Display Identifiers");
+	}
+}
+
+/**
+ * The start button was clicked
+ * @param event the event that was thrown
+ */
 void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 {
 	// validate the information
@@ -213,10 +278,11 @@ void SettingsFrame::OnButtonStart(wxCommandEvent &event)
 
 	// start window (if it is not already there)
 	if (currentTimerFrame == nullptr)
-		currentTimerFrame = createTimerOnDisplay((int)displayNumber);
-
+		currentTimerFrame = new TimerFrame(this, secondTimer, (int)displayNumber);
+ 
 	displayingTime = false;
 	currentTimerFrame->SetDisplayTime(displayingTime);
+	
 	// give me back focus
 	this->SetFocus();
 	
@@ -257,12 +323,18 @@ void SettingsFrame::OnButtonStop(wxCommandEvent &event)
 void SettingsFrame::OnButtonHide(wxCommandEvent &event)
 {
 	secondTimer->StopTimer();
-	currentTimerFrame->Hide();
-	delete currentTimerFrame;
-	currentTimerFrame = nullptr;
+	if (currentTimerFrame != nullptr) {
+		currentTimerFrame->Hide();
+		delete currentTimerFrame;
+		currentTimerFrame = nullptr;
+	}
 	inputScreenNumber->SetEditable(true);
 }
 
+/**
+ * someone clicked the color button to select a background color
+ * @param event the event that was thrown
+ */
 void SettingsFrame::OnButtonBackgroundColor(wxCommandEvent &event) {
 	wxColour result;
 	OnColorButton(inputBackgroundColor, &result);
@@ -271,18 +343,33 @@ void SettingsFrame::OnButtonBackgroundColor(wxCommandEvent &event) {
 	inputForegroundColorWarning->SetBackgroundColour(result);
 	inputForegroundColorError->SetBackgroundColour(result);
 }
+
+/**
+ * Someone clicked the color button to select the normal foreground color
+ * @param event the event that was thrown
+ */
 void SettingsFrame::OnButtonForegroundColorNormal(wxCommandEvent &event) {
 	OnColorButton(inputForegroundColorNormal);
 }
+
+/**
+ * Someone clicked the color button to select the warning foreground color
+ * @param event the event that was thrown
+ */
 void SettingsFrame::OnButtonForegroundColorWarning(wxCommandEvent &event) {
 	OnColorButton(inputForegroundColorWarning);
 }
+
+/**
+ * Someone clicked the button to select the error foreground color
+ * @param event the event that was thrown
+ */
 void SettingsFrame::OnButtonForegroundColorError(wxCommandEvent &event) {
 	OnColorButton(inputForegroundColorError);
 }
 
 /***
- *
+ * Sets the color within the control
  **/
 void SettingsFrame::SetControlColors(wxTextCtrl *control)
 {
@@ -291,12 +378,15 @@ void SettingsFrame::SetControlColors(wxTextCtrl *control)
 	wxColour color(str);
 	
 	if (control == inputBackgroundColor) {
+		// this is the background color input box. Protect ourselves so that the
+		// font is not the same color as the background (and hence, invisible)
 		control->SetBackgroundColour(str);
 		std::string c = std::string(color.GetAsString().mb_str());
 		if (c == "black") {
 			control->SetForegroundColour("white");
 		}
 	} else {
+		// this is not the background color input box
 		control->SetForegroundColour(color);
 		wxString bgs = inputBackgroundColor->GetValue();
 		wxColour bg(bgs);
@@ -306,6 +396,8 @@ void SettingsFrame::SetControlColors(wxTextCtrl *control)
 
 /***
  * Handles someone clicking a color button
+ * @param textControl the control that we're using
+ * @param color the place to store the color that was selected by the user (optional)
  **/
 void SettingsFrame::OnColorButton(wxTextCtrl* textControl, wxColour* color) {
 	bool colorPassed = true;
@@ -330,18 +422,11 @@ void SettingsFrame::OnColorButton(wxTextCtrl* textControl, wxColour* color) {
 }
 
 /***
- * This actually goes out and creates a TimerFrame "dialog"
+ * The timer threw an event, place the time on the current dialog
+ * and possibly change the color of the font on the TimerFrame
+ * @param event the event that was thrown
  **/
-TimerFrame* SettingsFrame::createTimerOnDisplay(int displayNumber)
-{
-	TimerFrame *timerFrame = new TimerFrame(this, secondTimer, displayNumber);
-	return timerFrame;
-}
-
-/***
- * The timer threw an event
- **/
-void SettingsFrame::OnTimer(wxTimerEvent &Event)
+void SettingsFrame::OnTimer(wxTimerEvent &event)
 {
 	wxColour *currentColor = normalColor;
 	currentTimerFrame->SetForegroundColour(*currentColor);
@@ -362,11 +447,13 @@ void SettingsFrame::OnTimer(wxTimerEvent &Event)
 		textTimerDisplaying->SetLabel(SecondTimer::ToString(secondTimer->SecondsSinceStart()));
 	}
 	// continue processing other event handlers
-	Event.Skip(true);
+	event.Skip(true);
 }
 
 /***
  * convert a string as MM:SS or simply MM to seconds
+ * @param input a string as MM:SS or simply MM
+ * @returns number of seconds of input string. i.e. 1:30 = 90 seconds
  **/
 std::chrono::seconds SettingsFrame::getDuration(std::string input)
 {
