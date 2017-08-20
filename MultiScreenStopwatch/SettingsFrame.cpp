@@ -132,6 +132,10 @@ SettingsFrame::SettingsFrame(const wxString& window_title, wxPoint* start_point)
  */
 SettingsFrame::~SettingsFrame()
 {
+	if (identifierDialogs != nullptr) {
+		wxCommandEvent e;
+		OnButtonDisplayIdentifier(e);
+	}
 	// labels
 	textScreenNumber->Destroy();
 	textTimerMinutes->Destroy();
