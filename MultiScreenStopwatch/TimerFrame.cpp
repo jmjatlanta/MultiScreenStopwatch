@@ -31,7 +31,7 @@ TimerFrame::TimerFrame(wxWindow *parent, SecondTimer* secondTimer, int displayNu
 	delete chosenDisplay;
 	
 	// create font
-	alarmClockFont = new wxFont(alarmClockFontSize, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, "alarm clocks", wxFONTENCODING_DEFAULT);
+	alarmClockFont = new wxFont(alarmClockFontSize, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, "alarm clock", wxFONTENCODING_DEFAULT);
 	clockFont = new wxFont(clockFontSize, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, "alarm clock", wxFONTENCODING_DEFAULT);
 	
 	// create a panel
